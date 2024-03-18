@@ -347,7 +347,7 @@ void Npc::onPlayerSellAllLoot(uint32_t playerId, uint16_t itemId, bool ignore, u
 		auto ss = std::stringstream();
 		if (totalPrice == 0) {
 			ss << "You have no items in your loot pouch.";
-			player->sendTextMessage(MESSAGE_TRANSACTION, ss.str());
+			player->sendTextMessage(MESSAGE_TRADE, ss.str());
 			return;
 		}
 		if (hasMore) {
