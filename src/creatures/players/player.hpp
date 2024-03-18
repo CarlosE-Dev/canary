@@ -584,6 +584,9 @@ public:
 	uint32_t getLevel() const {
 		return level;
 	}
+
+	bool checkIfPlayerHasLootPouch() const;
+
 	uint8_t getLevelPercent() const {
 		return levelPercent;
 	}
@@ -2537,6 +2540,14 @@ public:
 
 	bool checkAutoLoot(bool isBoss) const {
 		const bool autoLoot = g_configManager().getBoolean(AUTOLOOT, __FUNCTION__);
+
+		// autoloot w/ loot pouch only
+		const bool playerHasLootPouch = checkIfPlayerHasLootPouch();
+
+		if (!playerHasLootPouch) {
+			return false;
+		}
+
 		if (!autoLoot) {
 			return false;
 		}

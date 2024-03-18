@@ -1,12 +1,19 @@
 local feature = TalkAction("!autoloot")
 
 local validValues = {
-	-- "all",
 	"on",
 	"off",
+	"on all"
 }
 
 function feature.onSay(player, words, param)
+	local playerHasLootPouch = player:checkIfPlayerHasLootPouch()
+
+	if not playerHasLootPouch then
+		player:sendCancelMessage("You need a loot pouch to perform this action.")
+		return true
+	end
+
 	if not configManager.getBoolean(configKeys.AUTOLOOT) then
 		return true
 	end
@@ -20,7 +27,7 @@ function feature.onSay(player, words, param)
 		return true
 	end
 
-	if param == "all" then
+	if param == "on all" then
 		player:setFeature(Features.AutoLoot, 2)
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "AutoLoot is now enabled for all kills (including bosses).")
 	elseif param == "on" then

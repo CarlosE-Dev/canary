@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <items>
 	<!-- Liquids -->
 	<!-- Fluid type 0 is same as water (id="1") -->
@@ -47073,7 +47073,7 @@ hands of its owner. Granted by TibiaRoyal.com"/>
 		<attribute key="wrapableto" value="23398"/>
 		<attribute key="weight" value="850"/>
 	</item>
-	<item id="23721" article="a" name="gold pouch">
+	<item id="23721" article="a" name="loot pouch">
 		<attribute key="description" value="A infinity bag where you can hold coins."/>
 		<attribute key="containersize" value="20"/>
 		<attribute key="movable" value="0"/>

@@ -3881,6 +3881,11 @@ bool Player::hasItemCountById(uint16_t itemId, uint32_t itemAmount, bool checkSt
 	return newCount >= itemAmount;
 }
 
+bool Player::checkIfPlayerHasLootPouch() const {
+	const int lootPouchId = 23721;
+	return hasItemCountById(lootPouchId, 1, true);
+}
+
 bool Player::removeItemCountById(uint16_t itemId, uint32_t itemAmount, bool removeFromStash /* = true*/) {
 	// Here we guarantee that the player has at least the necessary amount of items he needs, if not, we return
 	if (!hasItemCountById(itemId, itemAmount, removeFromStash)) {

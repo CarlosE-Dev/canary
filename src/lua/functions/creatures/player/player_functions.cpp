@@ -2114,6 +2114,17 @@ int PlayerFunctions::luaPlayerShowTextDialog(lua_State* L) {
 	return 1;
 }
 
+int PlayerFunctions::luaPlayerCheckIfPlayerHasLootPouch(lua_State* L) {
+	std::shared_ptr<Player> player = getUserdataShared<Player>(L, 1);
+	if (!player) {
+		lua_pushnil(L);
+		return 1;
+	}
+
+	lua_pushboolean(L, player->checkIfPlayerHasLootPouch());
+	return 1;
+}
+
 int PlayerFunctions::luaPlayerSendTextMessage(lua_State* L) {
 	// player:sendTextMessage(type, text[, position, primaryValue = 0, primaryColor = TEXTCOLOR_NONE[, secondaryValue = 0, secondaryColor = TEXTCOLOR_NONE]])
 	// player:sendTextMessage(type, text, channelId)
