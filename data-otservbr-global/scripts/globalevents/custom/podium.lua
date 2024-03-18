@@ -3,71 +3,68 @@ local interval = 120 -- interval (in minutes)
 local positions = { -- position in map
 	top1 = Position(32375, 32212, 7),
 	top2 = Position(32373, 32212, 7),
-	top3 = Position(32377, 32212, 7)
+	top3 = Position(32377, 32212, 7),
 }
 
 local function getTopPlayers()
-		local topPlayersQuery = db.storeQuery("SELECT `name`, `level`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons` FROM `players` WHERE `group_id` != 6 ORDER BY `level` DESC LIMIT 3")
-		local index = 1
-		if topPlayersQuery then
-        repeat
-						if(index == 1)
-							then
-								player1 = {
-									name = result.getDataString(topPlayersQuery, "name"),
-									level = result.getDataInt(topPlayersQuery, "level"),
-									outfit = {
-										lookType = result.getDataInt(topPlayersQuery, "looktype"),
-										lookHead = result.getDataInt(topPlayersQuery, "lookhead"),
-										lookBody = result.getDataInt(topPlayersQuery, "lookbody"),
-										lookLegs = result.getDataInt(topPlayersQuery, "looklegs"),
-										lookFeet = result.getDataInt(topPlayersQuery, "lookfeet"),
-										lookAddons = result.getDataInt(topPlayersQuery, "lookaddons")
-									}
-								}
-						end
+	local topPlayersQuery = db.storeQuery("SELECT `name`, `level`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons` FROM `players` WHERE `group_id` != 6 ORDER BY `level` DESC LIMIT 3")
+	local index = 1
+	if topPlayersQuery then
+		repeat
+			if index == 1 then
+				player1 = {
+					name = result.getDataString(topPlayersQuery, "name"),
+					level = result.getDataInt(topPlayersQuery, "level"),
+					outfit = {
+						lookType = result.getDataInt(topPlayersQuery, "looktype"),
+						lookHead = result.getDataInt(topPlayersQuery, "lookhead"),
+						lookBody = result.getDataInt(topPlayersQuery, "lookbody"),
+						lookLegs = result.getDataInt(topPlayersQuery, "looklegs"),
+						lookFeet = result.getDataInt(topPlayersQuery, "lookfeet"),
+						lookAddons = result.getDataInt(topPlayersQuery, "lookaddons"),
+					},
+				}
+			end
 
-						if(index == 2)
-							then
-								player2 = {
-									name = result.getDataString(topPlayersQuery, "name"),
-									level = result.getDataInt(topPlayersQuery, "level"),
-									outfit = {
-										lookType = result.getDataInt(topPlayersQuery, "looktype"),
-										lookHead = result.getDataInt(topPlayersQuery, "lookhead"),
-										lookBody = result.getDataInt(topPlayersQuery, "lookbody"),
-										lookLegs = result.getDataInt(topPlayersQuery, "looklegs"),
-										lookFeet = result.getDataInt(topPlayersQuery, "lookfeet"),
-										lookAddons = result.getDataInt(topPlayersQuery, "lookaddons")
-									}
-								}
-						end
+			if index == 2 then
+				player2 = {
+					name = result.getDataString(topPlayersQuery, "name"),
+					level = result.getDataInt(topPlayersQuery, "level"),
+					outfit = {
+						lookType = result.getDataInt(topPlayersQuery, "looktype"),
+						lookHead = result.getDataInt(topPlayersQuery, "lookhead"),
+						lookBody = result.getDataInt(topPlayersQuery, "lookbody"),
+						lookLegs = result.getDataInt(topPlayersQuery, "looklegs"),
+						lookFeet = result.getDataInt(topPlayersQuery, "lookfeet"),
+						lookAddons = result.getDataInt(topPlayersQuery, "lookaddons"),
+					},
+				}
+			end
 
-						if(index == 3)
-							then
-								player3 = {
-									name = result.getDataString(topPlayersQuery, "name"),
-									level = result.getDataInt(topPlayersQuery, "level"),
-									outfit = {
-										lookType = result.getDataInt(topPlayersQuery, "looktype"),
-										lookHead = result.getDataInt(topPlayersQuery, "lookhead"),
-										lookBody = result.getDataInt(topPlayersQuery, "lookbody"),
-										lookLegs = result.getDataInt(topPlayersQuery, "looklegs"),
-										lookFeet = result.getDataInt(topPlayersQuery, "lookfeet"),
-										lookAddons = result.getDataInt(topPlayersQuery, "lookaddons")
-									}
-								}
-						end
+			if index == 3 then
+				player3 = {
+					name = result.getDataString(topPlayersQuery, "name"),
+					level = result.getDataInt(topPlayersQuery, "level"),
+					outfit = {
+						lookType = result.getDataInt(topPlayersQuery, "looktype"),
+						lookHead = result.getDataInt(topPlayersQuery, "lookhead"),
+						lookBody = result.getDataInt(topPlayersQuery, "lookbody"),
+						lookLegs = result.getDataInt(topPlayersQuery, "looklegs"),
+						lookFeet = result.getDataInt(topPlayersQuery, "lookfeet"),
+						lookAddons = result.getDataInt(topPlayersQuery, "lookaddons"),
+					},
+				}
+			end
 
-						index = index + 1;
-				until not result.next(topPlayersQuery)
+			index = index + 1
+		until not result.next(topPlayersQuery)
 
-				result.free(topPlayersQuery)
-				index = 1;
-		else
-        print("[PODIUM] Error")
-				return false;
-    end
+		result.free(topPlayersQuery)
+		index = 1
+	else
+		print("[PODIUM] Error")
+		return false
+	end
 end
 
 local function spawnNpcs()
@@ -75,11 +72,11 @@ local function spawnNpcs()
 	local npc1 = Game.createNpc("Top one", positions.top1)
 	if npc1 then
 		local npcName1 = string.format("%s [%d]", player1.name, player1.level)
-			npc1:setMasterPos(positions.top1)
-			npc1:setName(npcName1)
-			npc1:setOutfit(player1.outfit)
-			npc1:setSpeechBubble(0)
-			Game.setStorageValue(GlobalStorage.Podium.One, npcName1)
+		npc1:setMasterPos(positions.top1)
+		npc1:setName(npcName1)
+		npc1:setOutfit(player1.outfit)
+		npc1:setSpeechBubble(0)
+		Game.setStorageValue(GlobalStorage.Podium.One, npcName1)
 	end
 
 	local npc2 = Game.createNpc("Top two", positions.top2)
@@ -95,11 +92,11 @@ local function spawnNpcs()
 	local npc3 = Game.createNpc("Top three", positions.top3)
 	if npc3 then
 		local npcName3 = string.format("%s [%d]", player3.name, player3.level)
-			npc3:setMasterPos(positions.top3)
-			npc3:setName(npcName3)
-			npc3:setOutfit(player3.outfit)
-			npc3:setSpeechBubble(0)
-			Game.setStorageValue(GlobalStorage.Podium.Three, npcName3)
+		npc3:setMasterPos(positions.top3)
+		npc3:setName(npcName3)
+		npc3:setOutfit(player3.outfit)
+		npc3:setSpeechBubble(0)
+		Game.setStorageValue(GlobalStorage.Podium.Three, npcName3)
 	end
 end
 
@@ -147,7 +144,7 @@ local podium = GlobalEvent("podium")
 
 function podium.onThink(interval)
 	updatePodium()
-	return true;
+	return true
 end
 
 podium:interval(interval * 60000)
