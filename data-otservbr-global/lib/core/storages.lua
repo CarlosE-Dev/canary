@@ -3100,7 +3100,12 @@ GlobalStorage = {
 	FacelessBaneStepsOn = 65018,
 	FacelessBaneDeaths = 65019,
 	FacelessBaneResetSteps = 65020,
-	KeysUpdate = 40000, -- Reserved storage from 40000 - 40000
+	KeysUpdate = 40000, -- Reserved storage from 40000 - 40000,
+	Podium = {
+    One = 70991,
+    Two = 70992,
+    Three = 70993
+	}
 }
 
 startupGlobalStorages = {
