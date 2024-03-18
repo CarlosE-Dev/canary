@@ -16,7 +16,7 @@ npcConfig.outfit = {
 	lookBody = 79,
 	lookLegs = 117,
 	lookFeet = 76,
-	lookAddons = 0,
+	lookAddons = 2,
 }
 
 npcConfig.flags = {
