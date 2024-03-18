@@ -721,6 +721,5 @@ private:
 	static int luaPlayerRemoveAchievementPoints(lua_State* L);
 	static int luaPlayerCheckIfPlayerHasLootPouch(lua_State* L);
 
-
 	friend class CreatureFunctions;
 };
