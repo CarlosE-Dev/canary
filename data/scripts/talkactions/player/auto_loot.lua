@@ -3,7 +3,7 @@ local feature = TalkAction("!autoloot")
 local validValues = {
 	"on",
 	"off",
-	"on all"
+	"on all",
 }
 
 function feature.onSay(player, words, param)
