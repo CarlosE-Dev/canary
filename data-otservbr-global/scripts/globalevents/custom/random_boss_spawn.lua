@@ -1,12 +1,12 @@
 -- bosses time to spawn
 local bossSpawnSchedule = {
-   firstTime = "9:00",
-   secondTime = "18:00"
+	firstTime = "9:00",
+	secondTime = "18:00",
 }
 
 -- bosses that can random spawn
 local possibleBosses = {
-	"Grand Master Oberon"
+	"Grand Master Oberon",
 }
 
 -- first boss spawn position
@@ -17,14 +17,14 @@ local secondSpawnPosition = Position(33773, 31504, 14)
 -- enable/disable global message after boss defeat (true/false)
 local enableGlobalDefeatMessage = true
 -- the global message will appear after boss defeat (dont remove [BOSSNAME] from the message)
-local globalMessageFirstBossDefeat = "The dreaded daily boss [BOSSNAME] has been defeated" ;
-local globalMessageSecondBossDefeat = "The dreaded daily boss [BOSSNAME] has been defeated" ;
+local globalMessageFirstBossDefeat = "The dreaded daily boss [BOSSNAME] has been defeated"
+local globalMessageSecondBossDefeat = "The dreaded daily boss [BOSSNAME] has been defeated"
 
 -- enable/disable global message when boss spawns (true/false)
 local enableGlobalSpawnMessage = true
 -- the global message will appear when boss spawns (dont remove [BOSSNAME] from the message)
-local globalMessageFirstBossSpawn = "Boss [BOSSNAME] spawned" ;
-local globalMessageSecondBossSpawn = "Boss [BOSSNAME] spawned" ;
+local globalMessageFirstBossSpawn = "Boss [BOSSNAME] spawned"
+local globalMessageSecondBossSpawn = "Boss [BOSSNAME] spawned"
 
 local onBossDeathEvent = CreatureEvent("onBossDeathEvent")
 
@@ -70,26 +70,26 @@ function randomBossSpawn.onThink(interval, lastExecution, thinkInterval)
 	local firstBossStorage = Game.getStorageValue(GlobalStorage.firstCustomBoss)
 	local secondBossStorage = Game.getStorageValue(GlobalStorage.secondCustomBoss)
 
-	if(firstBossStorage == 2 and secondBossStorage == 2) then
+	if firstBossStorage == 2 and secondBossStorage == 2 then
 		return true
 	end
 
-	if(firstBossStorage < 1) then
-			if firstTimeSubstring == realTimeSubstring then
-				local firstBoss = Game.createMonster(randomBoss, firstSpawnPosition)
-				Game.setStorageValue(GlobalStorage.firstCustomBoss, 1)
-				firstBoss:registerEvent("onBossDeathEvent")
+	if firstBossStorage < 1 then
+		if firstTimeSubstring == realTimeSubstring then
+			local firstBoss = Game.createMonster(randomBoss, firstSpawnPosition)
+			Game.setStorageValue(GlobalStorage.firstCustomBoss, 1)
+			firstBoss:registerEvent("onBossDeathEvent")
 
-				if enableGlobalSpawnMessage then
-					local firstBossMessage = string.gsub(globalMessageFirstBossSpawn, "%[BOSSNAME%]", randomBoss)
-					Game.broadcastMessage(firstBossMessage, MESSAGE_GAME_HIGHLIGHT)
-				end
-				return true
+			if enableGlobalSpawnMessage then
+				local firstBossMessage = string.gsub(globalMessageFirstBossSpawn, "%[BOSSNAME%]", randomBoss)
+				Game.broadcastMessage(firstBossMessage, MESSAGE_GAME_HIGHLIGHT)
 			end
 			return true
+		end
+		return true
 	end
 
-	if(secondBossStorage < 1 and firstBossStorage == 2) then
+	if secondBossStorage < 1 and firstBossStorage == 2 then
 		if secondTimeSubstring == realTimeSubstring then
 			local secondBoss = Game.createMonster(randomBoss, secondSpawnPosition)
 			Game.setStorageValue(GlobalStorage.secondCustomBoss, 1)
